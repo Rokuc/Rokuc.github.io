@@ -30,7 +30,7 @@
   
     
   
-  <meta name="description" content="What actually is sentiment analysis? The basic task of sentiment analysis or otherwise refered to as opinion mining, is emotion recognition and polarity detection. In this article we will focus on the latter, as we will try to create a binary classifier whose task will be to predict the polarity of a our texts." />
+  <meta name="description" content="Starting our project? Let me start by explaining what classification is. Classification in our case is systematic arrangement of data in different categories according to established criteria which are learned by our algorithms." />
 
   
   <link rel="alternate" hreflang="en-us" href="https://rokuc.github.io/post/jupyter/" />
@@ -290,14 +290,14 @@
   
   <meta property="og:site_name" content="Rok Jankovic" />
   <meta property="og:url" content="https://rokuc.github.io/post/jupyter/" />
-  <meta property="og:title" content="A Short Guide to Sentiment Analysis in R | Rok Jankovic" />
-  <meta property="og:description" content="What actually is sentiment analysis? The basic task of sentiment analysis or otherwise refered to as opinion mining, is emotion recognition and polarity detection. In this article we will focus on the latter, as we will try to create a binary classifier whose task will be to predict the polarity of a our texts." /><meta property="og:image" content="https://rokuc.github.io/post/jupyter/featured.jpg" />
+  <meta property="og:title" content="Coding with Python | Rok Jankovic" />
+  <meta property="og:description" content="Starting our project? Let me start by explaining what classification is. Classification in our case is systematic arrangement of data in different categories according to established criteria which are learned by our algorithms." /><meta property="og:image" content="https://rokuc.github.io/post/jupyter/featured.jpg" />
     <meta property="twitter:image" content="https://rokuc.github.io/post/jupyter/featured.jpg" /><meta property="og:locale" content="en-us" />
   
     
       <meta
         property="article:published_time"
-        content="2021-05-07T00:00:00&#43;00:00"
+        content="2021-06-27T00:00:00&#43;00:00"
       />
     
     <meta property="article:modified_time" content="2021-05-07T00:00:00&#43;00:00">
@@ -326,13 +326,13 @@
     "@type": "WebPage",
     "@id": "https://rokuc.github.io/post/jupyter/"
   },
-  "headline": "A Short Guide to Sentiment Analysis in R",
+  "headline": "Coding with Python",
   
   "image": [
     "https://rokuc.github.io/post/jupyter/featured.jpg"
   ],
   
-  "datePublished": "2021-05-07T00:00:00Z",
+  "datePublished": "2021-06-27T00:00:00Z",
   "dateModified": "2021-05-07T00:00:00Z",
   
   "author": {
@@ -348,7 +348,7 @@
       "url": "https://rokuc.github.io/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
     }
   },
-  "description": "What actually is sentiment analysis? The basic task of sentiment analysis or otherwise refered to as opinion mining, is emotion recognition and polarity detection. In this article we will focus on the latter, as we will try to create a binary classifier whose task will be to predict the polarity of a our texts."
+  "description": "Starting our project? Let me start by explaining what classification is. Classification in our case is systematic arrangement of data in different categories according to established criteria which are learned by our algorithms."
 }
 </script>
 
@@ -364,7 +364,7 @@
 
 
 
-  <title>A Short Guide to Sentiment Analysis in R | Rok Jankovic</title>
+  <title>Coding with Python | Rok Jankovic</title>
 </head>
 
 
@@ -659,10 +659,10 @@
 
 
 <div class="article-container pt-3">
-  <h1>A Short Guide to Sentiment Analysis in R</h1>
+  <h1>Coding with Python</h1>
 
   
-  <p class="page-subtitle">Using basic machine learning techniques</p>
+  <p class="page-subtitle">Simple Classification Using Machine Learning</p>
   
 
   
@@ -688,6 +688,8 @@
     
     
       
+          Last updated on
+      
     
     May 7, 2021
   </span>
@@ -698,7 +700,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    2 min read
+    3 min read
   </span>
   
 
@@ -735,39 +737,74 @@
   <div class="article-container">
 
     <div class="article-style">
-      <h2 id="what-actually-is-sentiment-analysis">What actually is sentiment analysis?</h2>
-<p>The basic task of sentiment analysis or otherwise refered to as opinion mining, is emotion recognition and polarity detection. In this article we will focus on the latter, as we will try to create a binary classifier whose task will be to predict the polarity of a our texts.</p>
-<pre><code>&gt; 1+1
-[1] 2
+      <h2 id="starting-our-project">Starting our project?</h2>
+<p>Let me start by explaining what classification is. Classification in our case is systematic arrangement of data in different categories according to established criteria which are learned by our algorithms. In this article we will focus more on the code rather than going in to the theory of different algorithms. After we have chosen the dataset that we would like to work with we can start to code.</p>
+<p>As the first task We will have a look at weather there is a mutual relationship or connection between two or more variables in our dataset. The figure that measures such a relationship is sometimes referred to as the correlation coefficient.</p>
+<pre><code>import pandas as pd
+corr_metrics = echo_tracks.corr()
+corr_metrics.style.background_gradient()
 </code></pre>
-<h2 id="install-python-and-jupyterlab">Install Python and JupyterLab</h2>
-<p><a href="https://www.anaconda.com/distribution/#download-section" target="_blank" rel="noopener">Install Anaconda</a> which includes Python 3 and JupyterLab.</p>
-<p>Alternatively, install JupyterLab with <code>pip3 install jupyterlab</code>.</p>
-<h2 id="create-or-upload-a-jupyter-notebook">Create or upload a Jupyter notebook</h2>
-<p>Run the following commands in your Terminal, substituting <code>&lt;MY-WEBSITE-FOLDER&gt;</code> and <code>&lt;SHORT-POST-TITLE&gt;</code> with the file path to your Academic website folder and a short title for your blog post (use hyphens instead of spaces), respectively:</p>
-<pre><code class="language-bash">mkdir -p My_Website/content/post/&lt;SHORT-POST-TITLE&gt;/
-cd My_Website/content/post/&lt;SHORT-POST-TITLE&gt;/
-jupyter lab index.ipynb
-</code></pre>
-<p>The <code>jupyter</code> command above will launch the JupyterLab editor, allowing us to add Academic metadata and write the content.</p>
-<h2 id="edit-your-post-metadata">Edit your post metadata</h2>
-<p>The first cell of your Jupter notebook will contain your post metadata (<a href="https://sourcethemes.com/academic/docs/front-matter/" target="_blank" rel="noopener">front matter</a>).</p>
-<p>In Jupter, choose <em>Markdown</em> as the type of the first cell and wrap your Academic metadata in three dashes, indicating that it is YAML front matter:</p>
-<pre><code>---
-title: My post's title
-date: 2019-09-01
+<p><img src="./index_1_0.png" alt="png"></p>
+<p>As mentioned earlier, it can be particularly useful to simplify our models and use as few features as necessary to achieve the best result. Since we didn&rsquo;t find any particular strong correlations between our features, we can instead use a common approach to reduce the number of features called principal component analysis (PCA).</p>
+<h2 id="principle-component-analysis">Principle Component Analysis</h2>
+<p>It is possible that the variance between genres can be explained by just a few features in the dataset. PCA rotates the data along the axis of highest variance, thus allowing us to determine the relative contribution of each feature of our data towards the variance between classes.</p>
+<p>However, since PCA uses the absolute variance of a feature to rotate the data, a feature with a broader range of values will overpower and bias the algorithm relative to the other features. To avoid this, we must first normalize our data. There are a few methods to do this, but a common way is through standardization, such that all features have a mean = 0 and standard deviation = 1 (the resultant is a z-score).</p>
+<pre><code># Import our plotting module, and PCA class
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn.decomposition import PCA
 
-# Put any other Academic metadata here...
----
+# Get our explained variance ratios from PCA using all features
+pca = PCA()
+pca.fit(scaled_train_features)
+exp_variance = pca.explained_variance_ratio_
+
+# Calculate the cumulative explained variance
+cum_exp_variance = np.cumsum(exp_variance)
+
+# Plot the cumulative explained variance and draw a dashed line at 0.85.
+fig, ax = plt.subplots()
+ax.plot(cum_exp_variance)
+ax.axhline(y=0.85, linestyle='--')
 </code></pre>
-<p>Edit the metadata of your post, using the <a href="https://sourcethemes.com/academic/docs/managing-content" target="_blank" rel="noopener">documentation</a> as a guide to the available options.</p>
-<p>To set a <a href="https://sourcethemes.com/academic/docs/managing-content/#featured-image" target="_blank" rel="noopener">featured image</a>, place an image named <code>featured</code> into your post&rsquo;s folder.</p>
-<p>For other tips, such as using math, see the guide on <a href="https://sourcethemes.com/academic/docs/writing-markdown-latex/" target="_blank" rel="noopener">writing content with Academic</a>.</p>
-<h2 id="convert-notebook-to-markdown">Convert notebook to Markdown</h2>
-<pre><code class="language-bash">jupyter nbconvert index.ipynb --to markdown --NbConvertApp.output_files_dir=.
+<p><img src="./index_2_0.png" alt="png"></p>
+<pre><code># choose the n_components where about 85% of our variance can be explained
+n_components = 6
+
+# Perform PCA with the chosen number of components
+pca = PCA(n_components, random_state=10)
+pca.fit(scaled_train_features)
+pca_projection = pca.transform(scaled_train_features)
 </code></pre>
-<h2 id="example">Example</h2>
-<p>This post was created with Jupyter. The orginal files can be found at <a href="https://github.com/gcushen/hugo-academic/tree/master/exampleSite/content/post/jupyter">https://github.com/gcushen/hugo-academic/tree/master/exampleSite/content/post/jupyter</a></p>
+<h2 id="train-a-decision-tree">Train a Decision Tree</h2>
+<pre><code># Import train_test_split function and Decision tree classifier
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+
+# Split our data
+train_features, test_features, train_labels, test_labels = train_test_split(pca_projection, labels, random_state=10)
+
+# Train our decision tree
+tree = DecisionTreeClassifier(random_state=10)
+tree.fit(train_features, train_labels)
+
+# Predict the labels for the test data
+pred_labels_tree = tree.predict(test_features)
+
+# Create the classification report for both models
+from sklearn.metrics import classification_report
+class_rep_tree = classification_report(pred_labels_tree,test_labels)
+
+print(&quot;Decision Tree: \n&quot;, class_rep_tree)
+</code></pre>
+<pre><code>Decision Tree:
+              precision    recall  f1-score   support
+
+    Hip-Hop       0.66      0.66      0.66       230
+       Rock       0.92      0.92      0.92       971
+
+avg / total       0.87      0.87      0.87      1201
+</code></pre>
 
     </div>
 
@@ -780,7 +817,7 @@ date: 2019-09-01
 
 <div class="article-tags">
   
-  <a class="badge badge-light" href="/tag/abc/">abc</a>
+  <a class="badge badge-light" href="/tag/python/">Python</a>
   
 </div>
 
@@ -797,7 +834,7 @@ date: 2019-09-01
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=https://rokuc.github.io/post/jupyter/&amp;text=A%20Short%20Guide%20to%20Sentiment%20Analysis%20in%20R" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=https://rokuc.github.io/post/jupyter/&amp;text=Coding%20with%20Python" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -810,7 +847,7 @@ date: 2019-09-01
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=https://rokuc.github.io/post/jupyter/&amp;t=A%20Short%20Guide%20to%20Sentiment%20Analysis%20in%20R" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https://rokuc.github.io/post/jupyter/&amp;t=Coding%20with%20Python" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -823,7 +860,7 @@ date: 2019-09-01
       
       
       <li>
-        <a href="mailto:?subject=A%20Short%20Guide%20to%20Sentiment%20Analysis%20in%20R&amp;body=https://rokuc.github.io/post/jupyter/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Coding%20with%20Python&amp;body=https://rokuc.github.io/post/jupyter/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -836,7 +873,7 @@ date: 2019-09-01
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=https://rokuc.github.io/post/jupyter/&amp;title=A%20Short%20Guide%20to%20Sentiment%20Analysis%20in%20R" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=https://rokuc.github.io/post/jupyter/&amp;title=Coding%20with%20Python" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -849,7 +886,7 @@ date: 2019-09-01
       
       
       <li>
-        <a href="whatsapp://send?text=A%20Short%20Guide%20to%20Sentiment%20Analysis%20in%20R%20https://rokuc.github.io/post/jupyter/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="whatsapp://send?text=Coding%20with%20Python%20https://rokuc.github.io/post/jupyter/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -862,7 +899,7 @@ date: 2019-09-01
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=https://rokuc.github.io/post/jupyter/&amp;title=A%20Short%20Guide%20to%20Sentiment%20Analysis%20in%20R" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https://rokuc.github.io/post/jupyter/&amp;title=Coding%20with%20Python" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -902,7 +939,7 @@ date: 2019-09-01
     <div class="media-body">
       <h5 class="card-title"><a href="https://rokuc.github.io/">Rok Jankovic</a></h5>
       <h6 class="card-subtitle">Data Scientist Intern</h6>
-      <p class="card-text">In my spare time, I write articles for my blog and travel with my lovely girlfriend.</p>
+      <p class="card-text">Apart from exploring data science I work on various different projects and travel around Europe.</p>
       <ul class="network-icon" aria-hidden="true">
   
     

@@ -5,7 +5,7 @@
     <link>https://rokuc.github.io/</link>
       <atom:link href="https://rokuc.github.io/index.xml" rel="self" type="application/rss+xml" />
     <description>Rok Jankovic</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 07 May 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 27 Jun 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://rokuc.github.io/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>Rok Jankovic</title>
@@ -13,43 +13,78 @@
     </image>
     
     <item>
-      <title>A Short Guide to Sentiment Analysis in R</title>
+      <title>Coding with Python</title>
       <link>https://rokuc.github.io/post/jupyter/</link>
-      <pubDate>Fri, 07 May 2021 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 27 Jun 2021 00:00:00 +0000</pubDate>
       <guid>https://rokuc.github.io/post/jupyter/</guid>
-      <description>&lt;h2 id=&#34;what-actually-is-sentiment-analysis&#34;&gt;What actually is sentiment analysis?&lt;/h2&gt;
-&lt;p&gt;The basic task of sentiment analysis or otherwise refered to as opinion mining, is emotion recognition and polarity detection. In this article we will focus on the latter, as we will try to create a binary classifier whose task will be to predict the polarity of a our texts.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;gt; 1+1
-[1] 2
+      <description>&lt;h2 id=&#34;starting-our-project&#34;&gt;Starting our project?&lt;/h2&gt;
+&lt;p&gt;Let me start by explaining what classification is. Classification in our case is systematic arrangement of data in different categories according to established criteria which are learned by our algorithms. In this article we will focus more on the code rather than going in to the theory of different algorithms. After we have chosen the dataset that we would like to work with we can start to code.&lt;/p&gt;
+&lt;p&gt;As the first task We will have a look at weather there is a mutual relationship or connection between two or more variables in our dataset. The figure that measures such a relationship is sometimes referred to as the correlation coefficient.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import pandas as pd
+corr_metrics = echo_tracks.corr()
+corr_metrics.style.background_gradient()
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;install-python-and-jupyterlab&#34;&gt;Install Python and JupyterLab&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.anaconda.com/distribution/#download-section&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Install Anaconda&lt;/a&gt; which includes Python 3 and JupyterLab.&lt;/p&gt;
-&lt;p&gt;Alternatively, install JupyterLab with &lt;code&gt;pip3 install jupyterlab&lt;/code&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;create-or-upload-a-jupyter-notebook&#34;&gt;Create or upload a Jupyter notebook&lt;/h2&gt;
-&lt;p&gt;Run the following commands in your Terminal, substituting &lt;code&gt;&amp;lt;MY-WEBSITE-FOLDER&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;SHORT-POST-TITLE&amp;gt;&lt;/code&gt; with the file path to your Academic website folder and a short title for your blog post (use hyphens instead of spaces), respectively:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;mkdir -p My_Website/content/post/&amp;lt;SHORT-POST-TITLE&amp;gt;/
-cd My_Website/content/post/&amp;lt;SHORT-POST-TITLE&amp;gt;/
-jupyter lab index.ipynb
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The &lt;code&gt;jupyter&lt;/code&gt; command above will launch the JupyterLab editor, allowing us to add Academic metadata and write the content.&lt;/p&gt;
-&lt;h2 id=&#34;edit-your-post-metadata&#34;&gt;Edit your post metadata&lt;/h2&gt;
-&lt;p&gt;The first cell of your Jupter notebook will contain your post metadata (&lt;a href=&#34;https://sourcethemes.com/academic/docs/front-matter/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;front matter&lt;/a&gt;).&lt;/p&gt;
-&lt;p&gt;In Jupter, choose &lt;em&gt;Markdown&lt;/em&gt; as the type of the first cell and wrap your Academic metadata in three dashes, indicating that it is YAML front matter:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;---
-title: My post&#39;s title
-date: 2019-09-01
+&lt;p&gt;&lt;img src=&#34;./index_1_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;As mentioned earlier, it can be particularly useful to simplify our models and use as few features as necessary to achieve the best result. Since we didn&amp;rsquo;t find any particular strong correlations between our features, we can instead use a common approach to reduce the number of features called principal component analysis (PCA).&lt;/p&gt;
+&lt;h2 id=&#34;principle-component-analysis&#34;&gt;Principle Component Analysis&lt;/h2&gt;
+&lt;p&gt;It is possible that the variance between genres can be explained by just a few features in the dataset. PCA rotates the data along the axis of highest variance, thus allowing us to determine the relative contribution of each feature of our data towards the variance between classes.&lt;/p&gt;
+&lt;p&gt;However, since PCA uses the absolute variance of a feature to rotate the data, a feature with a broader range of values will overpower and bias the algorithm relative to the other features. To avoid this, we must first normalize our data. There are a few methods to do this, but a common way is through standardization, such that all features have a mean = 0 and standard deviation = 1 (the resultant is a z-score).&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# Import our plotting module, and PCA class
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn.decomposition import PCA
 
-# Put any other Academic metadata here...
----
+# Get our explained variance ratios from PCA using all features
+pca = PCA()
+pca.fit(scaled_train_features)
+exp_variance = pca.explained_variance_ratio_
+
+# Calculate the cumulative explained variance
+cum_exp_variance = np.cumsum(exp_variance)
+
+# Plot the cumulative explained variance and draw a dashed line at 0.85.
+fig, ax = plt.subplots()
+ax.plot(cum_exp_variance)
+ax.axhline(y=0.85, linestyle=&#39;--&#39;)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Edit the metadata of your post, using the &lt;a href=&#34;https://sourcethemes.com/academic/docs/managing-content&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;documentation&lt;/a&gt; as a guide to the available options.&lt;/p&gt;
-&lt;p&gt;To set a &lt;a href=&#34;https://sourcethemes.com/academic/docs/managing-content/#featured-image&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;featured image&lt;/a&gt;, place an image named &lt;code&gt;featured&lt;/code&gt; into your post&amp;rsquo;s folder.&lt;/p&gt;
-&lt;p&gt;For other tips, such as using math, see the guide on &lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;writing content with Academic&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;convert-notebook-to-markdown&#34;&gt;Convert notebook to Markdown&lt;/h2&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;jupyter nbconvert index.ipynb --to markdown --NbConvertApp.output_files_dir=.
+&lt;p&gt;&lt;img src=&#34;./index_2_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# choose the n_components where about 85% of our variance can be explained
+n_components = 6
+
+# Perform PCA with the chosen number of components
+pca = PCA(n_components, random_state=10)
+pca.fit(scaled_train_features)
+pca_projection = pca.transform(scaled_train_features)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;example&#34;&gt;Example&lt;/h2&gt;
-&lt;p&gt;This post was created with Jupyter. The orginal files can be found at &lt;a href=&#34;https://github.com/gcushen/hugo-academic/tree/master/exampleSite/content/post/jupyter&#34;&gt;https://github.com/gcushen/hugo-academic/tree/master/exampleSite/content/post/jupyter&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;train-a-decision-tree&#34;&gt;Train a Decision Tree&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;# Import train_test_split function and Decision tree classifier
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+
+# Split our data
+train_features, test_features, train_labels, test_labels = train_test_split(pca_projection, labels, random_state=10)
+
+# Train our decision tree
+tree = DecisionTreeClassifier(random_state=10)
+tree.fit(train_features, train_labels)
+
+# Predict the labels for the test data
+pred_labels_tree = tree.predict(test_features)
+
+# Create the classification report for both models
+from sklearn.metrics import classification_report
+class_rep_tree = classification_report(pred_labels_tree,test_labels)
+
+print(&amp;quot;Decision Tree: \n&amp;quot;, class_rep_tree)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;Decision Tree:
+              precision    recall  f1-score   support
+
+    Hip-Hop       0.66      0.66      0.66       230
+       Rock       0.92      0.92      0.92       971
+
+avg / total       0.87      0.87      0.87      1201
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
