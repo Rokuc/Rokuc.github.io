@@ -2,20 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://rokuc.github.io/post/jupyter/</loc>
+    <loc>https://rokuc.github.io/post/pca_python/</loc>
     <lastmod>2021-05-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://rokuc.github.io/post/</loc>
-    <lastmod>2021-05-07T00:00:00+00:00</lastmod>
+    <lastmod>2021-06-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://rokuc.github.io/tag/python/</loc>
     <lastmod>2021-05-07T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://rokuc.github.io/tag/r/</loc>
+    <lastmod>2021-06-07T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://rokuc.github.io/</loc>
-    <lastmod>2021-05-07T00:00:00+00:00</lastmod>
+    <lastmod>2021-06-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://rokuc.github.io/post/text_analysis_r/</loc>
+    <lastmod>2021-06-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://rokuc.github.io/tags/</loc>
-    <lastmod>2021-05-07T00:00:00+00:00</lastmod>
+    <lastmod>2021-06-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://rokuc.github.io/admin/</loc>
   </url><url>

@@ -5,7 +5,7 @@
     <link>https://rokuc.github.io/tag/python/</link>
       <atom:link href="https://rokuc.github.io/tag/python/index.xml" rel="self" type="application/rss+xml" />
     <description>Python</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 27 Jun 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 05 Aug 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://rokuc.github.io/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>Python</title>
@@ -14,18 +14,18 @@
     
     <item>
       <title>Coding with Python</title>
-      <link>https://rokuc.github.io/post/jupyter/</link>
-      <pubDate>Sun, 27 Jun 2021 00:00:00 +0000</pubDate>
-      <guid>https://rokuc.github.io/post/jupyter/</guid>
+      <link>https://rokuc.github.io/post/pca_python/</link>
+      <pubDate>Thu, 05 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://rokuc.github.io/post/pca_python/</guid>
       <description>&lt;h2 id=&#34;starting-our-project&#34;&gt;Starting our project?&lt;/h2&gt;
 &lt;p&gt;Let me start by explaining what classification is. Classification in our case is systematic arrangement of data in different categories according to established criteria which are learned by our algorithms. In this article we will focus more on the code rather than going in to the theory of different algorithms. After we have chosen the dataset that we would like to work with we can start to code.&lt;/p&gt;
-&lt;p&gt;As the first task We will have a look at weather there is a mutual relationship or connection between two or more variables in our dataset. The figure that measures such a relationship is sometimes referred to as the correlation coefficient.&lt;/p&gt;
+&lt;p&gt;As the first task we will have a look at weather there is a mutual relationship or connection between two or more variables in the echo_tracks dataset.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;import pandas as pd
 corr_metrics = echo_tracks.corr()
 corr_metrics.style.background_gradient()
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;./index_1_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;As mentioned earlier, it can be particularly useful to simplify our models and use as few features as necessary to achieve the best result. Since we didn&amp;rsquo;t find any particular strong correlations between our features, we can instead use a common approach to reduce the number of features called principal component analysis (PCA).&lt;/p&gt;
+&lt;p&gt;Since we didn&amp;rsquo;t find any particularly strong correlations between our features, we can instead use a common approach to reduce the number of features called principal component analysis (PCA).&lt;/p&gt;
 &lt;h2 id=&#34;principle-component-analysis&#34;&gt;Principle Component Analysis&lt;/h2&gt;
 &lt;p&gt;It is possible that the variance between genres can be explained by just a few features in the dataset. PCA rotates the data along the axis of highest variance, thus allowing us to determine the relative contribution of each feature of our data towards the variance between classes.&lt;/p&gt;
 &lt;p&gt;However, since PCA uses the absolute variance of a feature to rotate the data, a feature with a broader range of values will overpower and bias the algorithm relative to the other features. To avoid this, we must first normalize our data. There are a few methods to do this, but a common way is through standardization, such that all features have a mean = 0 and standard deviation = 1 (the resultant is a z-score).&lt;/p&gt;
@@ -48,15 +48,15 @@ ax.plot(cum_exp_variance)
 ax.axhline(y=0.85, linestyle=&#39;--&#39;)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;./index_2_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# choose the n_components where about 85% of our variance can be explained
-n_components = 6
+&lt;p&gt;Based on the plot above we choose 6 components or the number of components where 85% of the variance can be explained and perform PCA with the chosen number of components.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;n_components = 6
 
-# Perform PCA with the chosen number of components
 pca = PCA(n_components, random_state=10)
 pca.fit(scaled_train_features)
 pca_projection = pca.transform(scaled_train_features)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&#34;train-a-decision-tree&#34;&gt;Train a Decision Tree&lt;/h2&gt;
+&lt;p&gt;Here we first split data into train and test data using the train test split function. Later we train our decision tree and make predictions using our model. Finally we create the report for the decision tree.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;# Import train_test_split function and Decision tree classifier
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
@@ -71,12 +71,13 @@ tree.fit(train_features, train_labels)
 # Predict the labels for the test data
 pred_labels_tree = tree.predict(test_features)
 
-# Create the classification report for both models
+# Create the classification report for he decision tree
 from sklearn.metrics import classification_report
 class_rep_tree = classification_report(pred_labels_tree,test_labels)
 
 print(&amp;quot;Decision Tree: \n&amp;quot;, class_rep_tree)
 &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let us have a look at our results.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;Decision Tree:
               precision    recall  f1-score   support
 

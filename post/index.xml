@@ -5,7 +5,7 @@
     <link>https://rokuc.github.io/post/</link>
       <atom:link href="https://rokuc.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 27 Jun 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 05 Aug 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://rokuc.github.io/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>Posts</title>
@@ -14,18 +14,18 @@
     
     <item>
       <title>Coding with Python</title>
-      <link>https://rokuc.github.io/post/jupyter/</link>
-      <pubDate>Sun, 27 Jun 2021 00:00:00 +0000</pubDate>
-      <guid>https://rokuc.github.io/post/jupyter/</guid>
+      <link>https://rokuc.github.io/post/pca_python/</link>
+      <pubDate>Thu, 05 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://rokuc.github.io/post/pca_python/</guid>
       <description>&lt;h2 id=&#34;starting-our-project&#34;&gt;Starting our project?&lt;/h2&gt;
 &lt;p&gt;Let me start by explaining what classification is. Classification in our case is systematic arrangement of data in different categories according to established criteria which are learned by our algorithms. In this article we will focus more on the code rather than going in to the theory of different algorithms. After we have chosen the dataset that we would like to work with we can start to code.&lt;/p&gt;
-&lt;p&gt;As the first task We will have a look at weather there is a mutual relationship or connection between two or more variables in our dataset. The figure that measures such a relationship is sometimes referred to as the correlation coefficient.&lt;/p&gt;
+&lt;p&gt;As the first task we will have a look at weather there is a mutual relationship or connection between two or more variables in the echo_tracks dataset.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;import pandas as pd
 corr_metrics = echo_tracks.corr()
 corr_metrics.style.background_gradient()
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;./index_1_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;As mentioned earlier, it can be particularly useful to simplify our models and use as few features as necessary to achieve the best result. Since we didn&amp;rsquo;t find any particular strong correlations between our features, we can instead use a common approach to reduce the number of features called principal component analysis (PCA).&lt;/p&gt;
+&lt;p&gt;Since we didn&amp;rsquo;t find any particularly strong correlations between our features, we can instead use a common approach to reduce the number of features called principal component analysis (PCA).&lt;/p&gt;
 &lt;h2 id=&#34;principle-component-analysis&#34;&gt;Principle Component Analysis&lt;/h2&gt;
 &lt;p&gt;It is possible that the variance between genres can be explained by just a few features in the dataset. PCA rotates the data along the axis of highest variance, thus allowing us to determine the relative contribution of each feature of our data towards the variance between classes.&lt;/p&gt;
 &lt;p&gt;However, since PCA uses the absolute variance of a feature to rotate the data, a feature with a broader range of values will overpower and bias the algorithm relative to the other features. To avoid this, we must first normalize our data. There are a few methods to do this, but a common way is through standardization, such that all features have a mean = 0 and standard deviation = 1 (the resultant is a z-score).&lt;/p&gt;
@@ -48,15 +48,15 @@ ax.plot(cum_exp_variance)
 ax.axhline(y=0.85, linestyle=&#39;--&#39;)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;./index_2_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# choose the n_components where about 85% of our variance can be explained
-n_components = 6
+&lt;p&gt;Based on the plot above we choose 6 components or the number of components where 85% of the variance can be explained and perform PCA with the chosen number of components.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;n_components = 6
 
-# Perform PCA with the chosen number of components
 pca = PCA(n_components, random_state=10)
 pca.fit(scaled_train_features)
 pca_projection = pca.transform(scaled_train_features)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&#34;train-a-decision-tree&#34;&gt;Train a Decision Tree&lt;/h2&gt;
+&lt;p&gt;Here we first split data into train and test data using the train test split function. Later we train our decision tree and make predictions using our model. Finally we create the report for the decision tree.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;# Import train_test_split function and Decision tree classifier
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
@@ -71,12 +71,13 @@ tree.fit(train_features, train_labels)
 # Predict the labels for the test data
 pred_labels_tree = tree.predict(test_features)
 
-# Create the classification report for both models
+# Create the classification report for he decision tree
 from sklearn.metrics import classification_report
 class_rep_tree = classification_report(pred_labels_tree,test_labels)
 
 print(&amp;quot;Decision Tree: \n&amp;quot;, class_rep_tree)
 &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let us have a look at our results.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;Decision Tree:
               precision    recall  f1-score   support
 
@@ -84,6 +85,128 @@ print(&amp;quot;Decision Tree: \n&amp;quot;, class_rep_tree)
        Rock       0.92      0.92      0.92       971
 
 avg / total       0.87      0.87      0.87      1201
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Simple coding with R</title>
+      <link>https://rokuc.github.io/post/text_analysis_r/</link>
+      <pubDate>Thu, 05 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://rokuc.github.io/post/text_analysis_r/</guid>
+      <description>&lt;h2 id=&#34;libraries-used-in-our-project&#34;&gt;Libraries Used in our project&lt;/h2&gt;
+&lt;p&gt;In this section we will import a few packages that will be used through our analysis.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# Importing ML packages
+library(fastNaiveBayes)
+
+# Text processing packages
+library(tm)
+library(textclean)
+library(stringi)
+library(stringr)
+library(gmodels)
+
+# Webscraping
+library(rvest)
+
+# Data manipulation packages
+library(tidyverse)
+library(data.table)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The machine learning package fastNaiveBayes, is optimal packages to work with large datasets it implements a fast version of the respective naïve Bayes algorithm. Next we implement some packages used for the preprocessing of text. The following rvest library helps scrape data from the web. Finally the tidyverse package is a popular package for data manipulation and the data.table package is useful to work with an alternative data structure.&lt;/p&gt;
+&lt;h2 id=&#34;our-data&#34;&gt;Our data&lt;/h2&gt;
+&lt;p&gt;In our project we will use data downloaded from the StockTwits platform. They provide pre-labeled microblogging data, which is perfect for our example, as we will not have to label data by ourselves. We will use a dataset of 1000 of which 500 are positive (bullish) labeled and 500 are labeled as negative (bearish).&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;setwd(&amp;quot;E:/Projects&amp;quot;)
+load(&amp;quot;sentiment_data.RData&amp;quot;)
+head(sentiment_data,n=2)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;First let us have a look at the first two documents to get a general idea of how our data set looks.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;   Text
+1    $AMC if you can’t beat em join just like $A  hedgies this thing so volatile I only need weeklys
+2    $A  RECENT Twits Trends Today Change 18 % + https://t8sk.com/A
+   Sentiment
+1    Bullish
+2    Bullish
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We have a dataset called sentiment_data with the column Text, and the column Sentiment. We can see that our data is very noisy, and will need lots of preprocessing. But before we move to our preprocessing section let us first download two more datasets we will need in our preprocessing stage. First we will download Ticker symbols from the finviz platform.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;us_stocks &amp;lt;- NULL
+for(i in seq(1,7661,by = 20)){
+  us_stocks_data &amp;lt;- read_html(paste0(&amp;quot;https://finviz.com/screener.ashx?v=111&amp;amp;r=&amp;quot;,i)) %&amp;gt;%
+    html_nodes(&amp;quot;table&amp;quot;) %&amp;gt;%
+    .[[17]] %&amp;gt;%
+    html_table(header = TRUE)
+  us_stocks &amp;lt;- rbind(us_stocks,us_stocks_data)
+}
+stocks &amp;lt;- us_stocks$Ticker
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In the section above we scrape data about all stocks that are listed on finviz, with the goal to obtain all the possible ticker names. This method could be applied for scraping a myriad of other things as well. Now let us move on to downloading emoji sentiment data, and creating a dictionary that can be used with the textclean package.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;emojis &amp;lt;- read_html(paste0(&amp;quot;http://kt.ijs.si/data/Emoji_sentiment_ranking/&amp;quot;)) %&amp;gt;%
+  html_nodes(&amp;quot;#myTable&amp;quot;) %&amp;gt;%
+  html_table(header = TRUE) %&amp;gt;%
+  as.data.frame
+
+emojis_lexicon &amp;lt;- data.frame(x=emojis$Char, y=emojis$Sentiment.score..1....1.)
+emojis_lexicon$x &amp;lt;- iconv(emojis_lexicon$x, &amp;quot;latin1&amp;quot;, &amp;quot;ASCII&amp;quot;, &amp;quot;byte&amp;quot;)
+emojis_lexicon$y &amp;lt;- ifelse(emojis_lexicon$y&amp;gt;=0,&amp;quot;pos_tag&amp;quot;,&amp;quot;neg_tag&amp;quot;)
+emojis_lexicon &amp;lt;- data.table(emojis_lexicon)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here we create a dictionary that we will later use in our preprocessing stage. We assign a positive score to emojis with a score greater or equal to 0 and a negative sentiment score to emojis with a negative score.&lt;/p&gt;
+&lt;h2 id=&#34;pre-processing-stage&#34;&gt;Pre-processing stage&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;sentiment_data &amp;lt;- data.frame(gsub(&amp;quot;http.+&amp;quot;,&amp;quot;linktag&amp;quot;,sentiment_data[,1]),sentiment_data[,2])
+sentiment_data &amp;lt;- data.frame(stri_replace_all_regex(sentiment_data[,1],
+                                                    pattern = str_c(&amp;quot;\\b(&amp;quot;, str_c(stocks, collapse=&amp;quot;|&amp;quot;), &amp;quot;)\\b&amp;quot;),
+                                                    replacement = &amp;quot;cashtag&amp;quot;,
+                                                    vectorize_all=FALSE),
+                             sentiment_data[,2])
+sentiment_data &amp;lt;- data.frame(replace_emoji(sentiment_data[,1], emoji_dt = emojis_lexicon),sentiment_data[,2])
+sentiment_data &amp;lt;- data.frame(removePunctuation(sentiment_data[,1]),sentiment_data[,2])
+sentiment_data &amp;lt;- data.frame(removeNumbers(sentiment_data[,1]),sentiment_data[,2])
+sentiment_data &amp;lt;- data.frame(tolower(sentiment_data[,1]),sentiment_data[,2])
+
+colnames(sentiment_data) &amp;lt;- c(&amp;quot;Text&amp;quot;, &amp;quot;Sentiment&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here we use a variety of different approaches to manipulate our data. In the first line we use base r functions to replace urls starting with http with the word linktag. In the second line we replace all ticker symbols with the word cashtag, here we use the dataset stocks containing all the ticker symbols. Next we use our emoji_lexicon that we created in the previous section. Next we remove punctuation, numbers, and convert text to lowercase.&lt;/p&gt;
+&lt;h2 id=&#34;final-steps-before-training-and-testing-our-algorithm&#34;&gt;Final steps before training and testing our algorithm&lt;/h2&gt;
+&lt;p&gt;First let us create a dataset of 800 documents with 400 bullish documents and 400 bearish documents we will use to train our algorithms and a test set of 200 remaining documents.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;bull &amp;lt;- sentiment_data[sentiment_data$Sentiment==&amp;quot;Bullish&amp;quot;,]
+bear &amp;lt;- sentiment_data[sentiment_data$Sentiment==&amp;quot;Bearish&amp;quot;,]
+
+sentiment_data_train &amp;lt;- rbind(bull[1:400,],bear[1:400,])
+
+sentiment_data_test &amp;lt;- rbind(bull[401:500,],bear[401:500,])
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Next let us create simple binary document term matrices.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;train_dtm &amp;lt;- DocumentTermMatrix(Corpus(VectorSource(sentiment_data_train$Text)))
+test_dtm &amp;lt;- DocumentTermMatrix(Corpus(VectorSource(sentiment_data_test$Text)))
+
+train_dtm$v[train_dtm$v &amp;gt; 0] &amp;lt;- 1
+test_dtm$v[test_dtm$v &amp;gt; 0] &amp;lt;- 1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Finaly let us train and test our algorithm.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;NB_classifier &amp;lt;- fnb.bernoulli(x=train_dtm, y=sentiment_data_train$Sentiment, sparse = TRUE)
+
+NB_pred &amp;lt;- predict(NB_classifier, test_dtm, type = &amp;quot;class&amp;quot;)
+
+CT&amp;lt;- CrossTable(NB_pred, sentiment_data$Sentiment,
+                  prop.chisq = FALSE,
+                  prop.t = FALSE,
+                  dnn = c(&#39;predicted&#39;, &#39;actual&#39;))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let us have a look at our output.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;             | actual
+   predicted |   Bearish |   Bullish | Row Total |
+-------------|-----------|-----------|-----------|
+     Bearish |        78 |        48 |       126 |
+             |     0.619 |     0.381 |     0.630 |
+             |     0.780 |     0.480 |           |
+-------------|-----------|-----------|-----------|
+     Bullish |        22 |        52 |        74 |
+             |     0.297 |     0.703 |     0.370 |
+             |     0.220 |     0.520 |           |
+-------------|-----------|-----------|-----------|
+Column Total |       100 |       100 |       200 |
+             |     0.500 |     0.500 |           |
+-------------|-----------|-----------|-----------|
 &lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>

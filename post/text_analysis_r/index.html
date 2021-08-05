@@ -1,0 +1,1261 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.1.0 for Hugo" />
+  
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Rok Jankovic" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Libraries Used in our project In this section we will import a few packages that will be used through our analysis.
+# Importing ML packages library(fastNaiveBayes) # Text processing packages library(tm) library(textclean) library(stringi) library(stringr) library(gmodels) # Webscraping library(rvest) # Data manipulation packages library(tidyverse) library(data." />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://rokuc.github.io/post/text_analysis_r/" />
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    <meta name="theme-color" content="#1565c0" />
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.e7623dd8551519061cb997839c90f845.css" />
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/index.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_180x180_fill_lanczos_center_2.png" />
+
+  <link rel="canonical" href="https://rokuc.github.io/post/text_analysis_r/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image" />
+  
+  <meta property="og:site_name" content="Rok Jankovic" />
+  <meta property="og:url" content="https://rokuc.github.io/post/text_analysis_r/" />
+  <meta property="og:title" content="Simple coding with R | Rok Jankovic" />
+  <meta property="og:description" content="Libraries Used in our project In this section we will import a few packages that will be used through our analysis.
+# Importing ML packages library(fastNaiveBayes) # Text processing packages library(tm) library(textclean) library(stringi) library(stringr) library(gmodels) # Webscraping library(rvest) # Data manipulation packages library(tidyverse) library(data." /><meta property="og:image" content="https://rokuc.github.io/post/text_analysis_r/featured.jpg" />
+    <meta property="twitter:image" content="https://rokuc.github.io/post/text_analysis_r/featured.jpg" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2021-08-05T00:00:00&#43;00:00"
+      />
+    
+    <meta property="article:modified_time" content="2021-06-07T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://rokuc.github.io/post/text_analysis_r/"
+  },
+  "headline": "Simple coding with R",
+  
+  "image": [
+    "https://rokuc.github.io/post/text_analysis_r/featured.jpg"
+  ],
+  
+  "datePublished": "2021-08-05T00:00:00Z",
+  "dateModified": "2021-06-07T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Rok Jankovic"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Rok Jankovic",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://rokuc.github.io/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "Libraries Used in our project In this section we will import a few packages that will be used through our analysis.\n# Importing ML packages library(fastNaiveBayes) # Text processing packages library(tm) library(textclean) library(stringi) library(stringr) library(gmodels) # Webscraping library(rvest) # Data manipulation packages library(tidyverse) library(data."
+}
+</script>
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>Simple coding with R | Rok Jankovic</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="38319328a2cc48050a0ea0a9390960b1" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.226a9011996d125bf3fe4a5f22353a49.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container-xl">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Rok Jankovic</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Rok Jankovic</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>Simple coding with R</h1>
+
+  
+  <p class="page-subtitle">Binary Text Classification</p>
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+  <span >
+      Rok Jankovic</span>
+  </div>
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+          Last updated on
+      
+    
+    Jun 7, 2021
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    4 min read
+  </span>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+  
+
+</div>
+
+  
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 480px;">
+  <div style="position: relative">
+    <img src="/post/text_analysis_r/featured_hu2d46ca85c79fee270fd812cc20259994_328298_720x0_resize_q75_lanczos.jpg" alt="" class="featured-image">
+    <span class="article-header-caption">Image credit: <a href="https://unsplash.com/photos/LUYD2b7MNrg"><strong>Unsplash</strong></a></span>
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <h2 id="libraries-used-in-our-project">Libraries Used in our project</h2>
+<p>In this section we will import a few packages that will be used through our analysis.</p>
+<pre><code># Importing ML packages
+library(fastNaiveBayes)
+
+# Text processing packages
+library(tm)
+library(textclean)
+library(stringi)
+library(stringr)
+library(gmodels)
+
+# Webscraping
+library(rvest)
+
+# Data manipulation packages
+library(tidyverse)
+library(data.table)
+</code></pre>
+<p>The machine learning package fastNaiveBayes, is optimal packages to work with large datasets it implements a fast version of the respective naïve Bayes algorithm. Next we implement some packages used for the preprocessing of text. The following rvest library helps scrape data from the web. Finally the tidyverse package is a popular package for data manipulation and the data.table package is useful to work with an alternative data structure.</p>
+<h2 id="our-data">Our data</h2>
+<p>In our project we will use data downloaded from the StockTwits platform. They provide pre-labeled microblogging data, which is perfect for our example, as we will not have to label data by ourselves. We will use a dataset of 1000 of which 500 are positive (bullish) labeled and 500 are labeled as negative (bearish).</p>
+<pre><code>setwd(&quot;E:/Projects&quot;)
+load(&quot;sentiment_data.RData&quot;)
+head(sentiment_data,n=2)
+</code></pre>
+<p>First let us have a look at the first two documents to get a general idea of how our data set looks.</p>
+<pre><code>   Text
+1    $AMC if you can’t beat em join just like $A  hedgies this thing so volatile I only need weeklys
+2    $A  RECENT Twits Trends Today Change 18 % + https://t8sk.com/A
+   Sentiment
+1    Bullish
+2    Bullish
+</code></pre>
+<p>We have a dataset called sentiment_data with the column Text, and the column Sentiment. We can see that our data is very noisy, and will need lots of preprocessing. But before we move to our preprocessing section let us first download two more datasets we will need in our preprocessing stage. First we will download Ticker symbols from the finviz platform.</p>
+<pre><code>us_stocks &lt;- NULL
+for(i in seq(1,7661,by = 20)){
+  us_stocks_data &lt;- read_html(paste0(&quot;https://finviz.com/screener.ashx?v=111&amp;r=&quot;,i)) %&gt;%
+    html_nodes(&quot;table&quot;) %&gt;%
+    .[[17]] %&gt;%
+    html_table(header = TRUE)
+  us_stocks &lt;- rbind(us_stocks,us_stocks_data)
+}
+stocks &lt;- us_stocks$Ticker
+</code></pre>
+<p>In the section above we scrape data about all stocks that are listed on finviz, with the goal to obtain all the possible ticker names. This method could be applied for scraping a myriad of other things as well. Now let us move on to downloading emoji sentiment data, and creating a dictionary that can be used with the textclean package.</p>
+<pre><code>emojis &lt;- read_html(paste0(&quot;http://kt.ijs.si/data/Emoji_sentiment_ranking/&quot;)) %&gt;%
+  html_nodes(&quot;#myTable&quot;) %&gt;%
+  html_table(header = TRUE) %&gt;%
+  as.data.frame
+
+emojis_lexicon &lt;- data.frame(x=emojis$Char, y=emojis$Sentiment.score..1....1.)
+emojis_lexicon$x &lt;- iconv(emojis_lexicon$x, &quot;latin1&quot;, &quot;ASCII&quot;, &quot;byte&quot;)
+emojis_lexicon$y &lt;- ifelse(emojis_lexicon$y&gt;=0,&quot;pos_tag&quot;,&quot;neg_tag&quot;)
+emojis_lexicon &lt;- data.table(emojis_lexicon)
+</code></pre>
+<p>Here we create a dictionary that we will later use in our preprocessing stage. We assign a positive score to emojis with a score greater or equal to 0 and a negative sentiment score to emojis with a negative score.</p>
+<h2 id="pre-processing-stage">Pre-processing stage</h2>
+<pre><code>sentiment_data &lt;- data.frame(gsub(&quot;http.+&quot;,&quot;linktag&quot;,sentiment_data[,1]),sentiment_data[,2])
+sentiment_data &lt;- data.frame(stri_replace_all_regex(sentiment_data[,1],
+                                                    pattern = str_c(&quot;\\b(&quot;, str_c(stocks, collapse=&quot;|&quot;), &quot;)\\b&quot;),
+                                                    replacement = &quot;cashtag&quot;,
+                                                    vectorize_all=FALSE),
+                             sentiment_data[,2])
+sentiment_data &lt;- data.frame(replace_emoji(sentiment_data[,1], emoji_dt = emojis_lexicon),sentiment_data[,2])
+sentiment_data &lt;- data.frame(removePunctuation(sentiment_data[,1]),sentiment_data[,2])
+sentiment_data &lt;- data.frame(removeNumbers(sentiment_data[,1]),sentiment_data[,2])
+sentiment_data &lt;- data.frame(tolower(sentiment_data[,1]),sentiment_data[,2])
+
+colnames(sentiment_data) &lt;- c(&quot;Text&quot;, &quot;Sentiment&quot;)
+</code></pre>
+<p>Here we use a variety of different approaches to manipulate our data. In the first line we use base r functions to replace urls starting with http with the word linktag. In the second line we replace all ticker symbols with the word cashtag, here we use the dataset stocks containing all the ticker symbols. Next we use our emoji_lexicon that we created in the previous section. Next we remove punctuation, numbers, and convert text to lowercase.</p>
+<h2 id="final-steps-before-training-and-testing-our-algorithm">Final steps before training and testing our algorithm</h2>
+<p>First let us create a dataset of 800 documents with 400 bullish documents and 400 bearish documents we will use to train our algorithms and a test set of 200 remaining documents.</p>
+<pre><code>bull &lt;- sentiment_data[sentiment_data$Sentiment==&quot;Bullish&quot;,]
+bear &lt;- sentiment_data[sentiment_data$Sentiment==&quot;Bearish&quot;,]
+
+sentiment_data_train &lt;- rbind(bull[1:400,],bear[1:400,])
+
+sentiment_data_test &lt;- rbind(bull[401:500,],bear[401:500,])
+</code></pre>
+<p>Next let us create simple binary document term matrices.</p>
+<pre><code>train_dtm &lt;- DocumentTermMatrix(Corpus(VectorSource(sentiment_data_train$Text)))
+test_dtm &lt;- DocumentTermMatrix(Corpus(VectorSource(sentiment_data_test$Text)))
+
+train_dtm$v[train_dtm$v &gt; 0] &lt;- 1
+test_dtm$v[test_dtm$v &gt; 0] &lt;- 1
+</code></pre>
+<p>Finaly let us train and test our algorithm.</p>
+<pre><code>NB_classifier &lt;- fnb.bernoulli(x=train_dtm, y=sentiment_data_train$Sentiment, sparse = TRUE)
+
+NB_pred &lt;- predict(NB_classifier, test_dtm, type = &quot;class&quot;)
+
+CT&lt;- CrossTable(NB_pred, sentiment_data$Sentiment,
+                  prop.chisq = FALSE,
+                  prop.t = FALSE,
+                  dnn = c('predicted', 'actual'))
+</code></pre>
+<p>Let us have a look at our output.</p>
+<pre><code>             | actual
+   predicted |   Bearish |   Bullish | Row Total |
+-------------|-----------|-----------|-----------|
+     Bearish |        78 |        48 |       126 |
+             |     0.619 |     0.381 |     0.630 |
+             |     0.780 |     0.480 |           |
+-------------|-----------|-----------|-----------|
+     Bullish |        22 |        52 |        74 |
+             |     0.297 |     0.703 |     0.370 |
+             |     0.220 |     0.520 |           |
+-------------|-----------|-----------|-----------|
+Column Total |       100 |       100 |       200 |
+             |     0.500 |     0.500 |           |
+-------------|-----------|-----------|-----------|
+</code></pre>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/r/">R</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://rokuc.github.io/post/text_analysis_r/&amp;text=Simple%20coding%20with%20R" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://rokuc.github.io/post/text_analysis_r/&amp;t=Simple%20coding%20with%20R" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Simple%20coding%20with%20R&amp;body=https://rokuc.github.io/post/text_analysis_r/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://rokuc.github.io/post/text_analysis_r/&amp;title=Simple%20coding%20with%20R" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="whatsapp://send?text=Simple%20coding%20with%20R%20https://rokuc.github.io/post/text_analysis_r/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://rokuc.github.io/post/text_analysis_r/&amp;title=Simple%20coding%20with%20R" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://rokuc.github.io/"><img class="avatar mr-3 avatar-circle" src="/authors/admin/avatar_hu10f7f74c62f3fc4894af9cdd520e7d5f_155388_270x270_fill_q75_lanczos_center.jpg" alt="Rok Jankovic"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://rokuc.github.io/">Rok Jankovic</a></h5>
+      <h6 class="card-subtitle">Data Scientist Intern</h6>
+      <p class="card-text">Apart from exploring data science I work on various different projects and travel around Europe.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/jankorok" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://https://github.com/Rokuc" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/rok-jankovic/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+
+  
+
+  
+
+  
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+      
+      
+      
+      
+      
+      
+      Published with <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a> — the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/python.min.js"></script>
+        
+      
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    <script src="/js/bootstrap.bundle.min.6aed84840afc03ab4d5750157f69c120.js"></script>
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.b61a8f62b6e5c0cd322c8158c5b5dfb6.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>
