@@ -30,10 +30,10 @@
   
     
   
-  <meta name="description" content="In this project we train a simple naïve Bayes algorithm to classify the sentiment of documents from the StockTwits platform." />
+  <meta name="description" content="In this project we are again classifying investor sentiment. We compare the performance of K-Nearest Neighbors using a tf-idf document term matrix and the Word2vec model." />
 
   
-  <link rel="alternate" hreflang="en-us" href="https://rokuc.github.io/post/text_analysis_r/" />
+  <link rel="alternate" hreflang="en-us" href="https://rokuc.github.io/post/knn_w2v_dtm/" />
 
   
 
@@ -273,7 +273,7 @@
   <link rel="icon" type="image/png" href="/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png" />
   <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_180x180_fill_lanczos_center_2.png" />
 
-  <link rel="canonical" href="https://rokuc.github.io/post/text_analysis_r/" />
+  <link rel="canonical" href="https://rokuc.github.io/post/knn_w2v_dtm/" />
 
   
   
@@ -289,15 +289,15 @@
   <meta property="twitter:card" content="summary_large_image" />
   
   <meta property="og:site_name" content="Rok Jankovic" />
-  <meta property="og:url" content="https://rokuc.github.io/post/text_analysis_r/" />
-  <meta property="og:title" content="Text Classification with R | Rok Jankovic" />
-  <meta property="og:description" content="In this project we train a simple naïve Bayes algorithm to classify the sentiment of documents from the StockTwits platform." /><meta property="og:image" content="https://rokuc.github.io/post/text_analysis_r/featured.jpg" />
-    <meta property="twitter:image" content="https://rokuc.github.io/post/text_analysis_r/featured.jpg" /><meta property="og:locale" content="en-us" />
+  <meta property="og:url" content="https://rokuc.github.io/post/knn_w2v_dtm/" />
+  <meta property="og:title" content="Word2Vec vs Document Term Matrix | Rok Jankovic" />
+  <meta property="og:description" content="In this project we are again classifying investor sentiment. We compare the performance of K-Nearest Neighbors using a tf-idf document term matrix and the Word2vec model." /><meta property="og:image" content="https://rokuc.github.io/post/knn_w2v_dtm/featured.jpg" />
+    <meta property="twitter:image" content="https://rokuc.github.io/post/knn_w2v_dtm/featured.jpg" /><meta property="og:locale" content="en-us" />
   
     
       <meta
         property="article:published_time"
-        content="2021-08-05T00:00:00&#43;00:00"
+        content="2021-08-10T00:00:00&#43;00:00"
       />
     
     <meta property="article:modified_time" content="2021-06-07T00:00:00&#43;00:00">
@@ -324,15 +324,15 @@
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://rokuc.github.io/post/text_analysis_r/"
+    "@id": "https://rokuc.github.io/post/knn_w2v_dtm/"
   },
-  "headline": "Text Classification with R",
+  "headline": "Word2Vec vs Document Term Matrix",
   
   "image": [
-    "https://rokuc.github.io/post/text_analysis_r/featured.jpg"
+    "https://rokuc.github.io/post/knn_w2v_dtm/featured.jpg"
   ],
   
-  "datePublished": "2021-08-05T00:00:00Z",
+  "datePublished": "2021-08-10T00:00:00Z",
   "dateModified": "2021-06-07T00:00:00Z",
   
   "author": {
@@ -348,7 +348,7 @@
       "url": "https://rokuc.github.io/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
     }
   },
-  "description": "In this project we train a simple naïve Bayes algorithm to classify the sentiment of documents from the StockTwits platform."
+  "description": "In this project we are again classifying investor sentiment. We compare the performance of K-Nearest Neighbors using a tf-idf document term matrix and the Word2vec model."
 }
 </script>
 
@@ -364,11 +364,11 @@
 
 
 
-  <title>Text Classification with R | Rok Jankovic</title>
+  <title>Word2Vec vs Document Term Matrix | Rok Jankovic</title>
 </head>
 
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="38319328a2cc48050a0ea0a9390960b1" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="be96cdd6613a2df0c8ec3e4163f45df6" >
 
   
   
@@ -659,10 +659,10 @@
 
 
 <div class="article-container pt-3">
-  <h1>Text Classification with R</h1>
+  <h1>Word2Vec vs Document Term Matrix</h1>
 
   
-  <p class="page-subtitle">Predicting investor sentiment using naïve Bayes</p>
+  <p class="page-subtitle">Predicting investor sentiment using K-Nearest Neighbors</p>
   
 
   
@@ -725,10 +725,10 @@
 </div>
 
 
-<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 480px;">
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 640px;">
   <div style="position: relative">
-    <img src="/post/text_analysis_r/featured_hu2d46ca85c79fee270fd812cc20259994_328298_720x0_resize_q75_lanczos.jpg" alt="" class="featured-image">
-    <span class="article-header-caption">Image credit: <a href="https://unsplash.com/photos/LUYD2b7MNrg"><strong>Unsplash</strong></a></span>
+    <img src="/post/knn_w2v_dtm/featured_hu5ce0dd1d6c88e36b0288a38f66075dbd_2529701_720x0_resize_q75_lanczos.jpg" alt="" class="featured-image">
+    <span class="article-header-caption">Image credit: <a href="https://unsplash.com/photos/cAZKcDUEf1k"><strong>Unsplash</strong></a></span>
   </div>
 </div>
 
@@ -740,116 +740,143 @@
       <h2 id="libraries-used-in-our-project">Libraries Used in our project</h2>
 <p>In this section we will import a few packages that will be used through our analysis.</p>
 <pre><code># Importing ML packages
-library(fastNaiveBayes)
+library(FNN)
 
-# Text processing packages
+# Text Analysis
+library(tokenizers)
 library(tm)
-library(textclean)
-library(stringi)
-library(stringr)
-library(gmodels)
+library(word2vec)
 
-# Webscraping
-library(rvest)
-
-# Data manipulation packages
-library(tidyverse)
+# Data Manipulation
 library(data.table)
 </code></pre>
-<p>The machine learning package fastNaiveBayes, is optimal packages to work with large datasets it implements a fast version of the respective naïve Bayes algorithm. Next we implement some packages used for the preprocessing of text. The following rvest library helps scrape data from the web. Finally the tidyverse package is a popular package for data manipulation and the data.table package is useful to work with an alternative data structure.</p>
+<p>The machine learning package FNN, is a package that implements the knn algorithm. Next we use some packages for Text analysis including a tokenization package, the text mining package to implement the document term matrices and the word2vec package. Finally the data.table package is useful to work with an alternative data structure.</p>
 <h2 id="our-data">Our data</h2>
-<p>In our project we will use data downloaded from the StockTwits platform. They provide pre-labeled microblogging data, which is perfect for our example, as we will not have to label data by ourselves. We will use a dataset of 1000 of which 500 are positive (bullish) labeled and 500 are labeled as negative (bearish).</p>
+<p>In our project we will use data downloaded from the StockTwits platform. The dataset is pre-labeled as bullish/bearish and consists of about 2,500,000 preprocessed documents.</p>
 <pre><code>setwd(&quot;E:/Projects&quot;)
-load(&quot;sentiment_data.RData&quot;)
-head(sentiment_data,n=2)
+load(&quot;sentiment_data_pp.RData&quot;)
+head(sentiment_data,n=1)
 </code></pre>
-<p>First let us have a look at the first two documents to get a general idea of how our data set looks.</p>
+<p>First let us have a look at the first document to get a general idea of how our data set looks.</p>
 <pre><code>   Text
-1    $AMC if you can’t beat em join just like $A  hedgies this thing so volatile I only need weeklys
-2    $A  RECENT Twits Trends Today Change 18 % + https://t8sk.com/A
+1    cashtag earnings report two day bullish lead earnings growth linktag herb
    Sentiment
 1    Bullish
-2    Bullish
 </code></pre>
-<p>We have a dataset called sentiment_data with the column Text, and the column Sentiment. We can see that our data is very noisy, and will need lots of preprocessing. But before we move to our preprocessing section let us first download two more datasets we will need in our preprocessing stage. First we will download Ticker symbols from the finviz platform.</p>
-<pre><code>us_stocks &lt;- NULL
-for(i in seq(1,7661,by = 20)){
-  us_stocks_data &lt;- read_html(paste0(&quot;https://finviz.com/screener.ashx?v=111&amp;r=&quot;,i)) %&gt;%
-    html_nodes(&quot;table&quot;) %&gt;%
-    .[[17]] %&gt;%
-    html_table(header = TRUE)
-  us_stocks &lt;- rbind(us_stocks,us_stocks_data)
+<h2 id="experiment-setup">Experiment setup</h2>
+<p>First we will create an unbalanced dataset of 100,000 documents including 13% Bearish documents and 87% Bullish documents.</p>
+<pre><code>ind_Bullish &lt;- which(sentiment_data$Sentiment==&quot;Bullish&quot;)
+ind_Bearish &lt;- which(sentiment_data$Sentiment==&quot;Bearish&quot;)
+
+n &lt;- 50000
+
+x &lt;- rbind(sentiment_data[ind_Bearish[1:n*2*0.13],],sentiment_data[ind_Bullish[1:n*2*0.87],])
+</code></pre>
+<p>Now we will set up a simple k-fold CV framework. First we create 10 folds and store it in the folds_data variable.</p>
+<pre><code>kf &lt;- 10 #Set number of folds
+
+  bullish_sentiment &lt;- data.table(x[x$Sentiment==&quot;Bullish&quot;,], rname = rownames(x[x$Sentiment==&quot;Bullish&quot;,])) #take only the bullish sentiment
+  bearish_sentiment &lt;- data.table(x[x$Sentiment==&quot;Bearish&quot;,], rname = rownames(x[x$Sentiment==&quot;Bearish&quot;,]))
+
+  set.seed(2)
+  bull_index &lt;- split(bullish_sentiment$rname, sample(1:kf, length(bullish_sentiment$rname), replace=T))
+  set.seed(2)
+  bear_index &lt;- split(bearish_sentiment$rname, sample(1:kf, length(bearish_sentiment$rname), replace=T))
+
+  folds &lt;- lapply(1:kf, function(y) c(bull_index[[y]],bear_index[[y]]))
+  folds_data &lt;- lapply(folds, function(y) x[y,])
+</code></pre>
+<p>Next we create 10 repetitions of the 10 folds, which will result in a list containing 10 elements each of which will be a list of two elements a training dataset and a testing dataset.</p>
+<pre><code>data_prep_list&lt;-function(data_set){
+  tests&lt;-c(1:kf)
+  groups &lt;- list()
+  #for each test set, construct a respective list with all combinations of train sets
+  for(i in seq_along(tests)){
+    #get train and validation sets for the given test set
+    train&lt;-tests[!(tests %in% tests[i])]
+    #separate train and validation
+    tr&lt;-combn(train,(kf-1))
+    #create list for train and validation sets
+    #first create a list of 8 for the train data
+    training &lt;- list()
+    for(k in seq_len(ncol(tr))){
+      train &lt;- data_set[tr[,k]]
+      train_table &lt;- data.table()
+      for (b in 1:length(train)){
+        train_table &lt;- rbind(train_table, train[[b]])
+      }
+    }
+    groups[[i]] &lt;- list(training=train_table, test=data_set[[i]])  
+  }
+  groups  
 }
-stocks &lt;- us_stocks$Ticker
+
+raw_kfolds &lt;- data_prep_list(folds_data)
 </code></pre>
-<p>In the section above we scrape data about all stocks that are listed on finviz, with the goal to obtain all the possible ticker names. This method could be applied for scraping a myriad of other things as well. Now let us move on to downloading emoji sentiment data, and creating a dictionary that can be used with the textclean package.</p>
-<pre><code>emojis &lt;- read_html(paste0(&quot;http://kt.ijs.si/data/Emoji_sentiment_ranking/&quot;)) %&gt;%
-  html_nodes(&quot;#myTable&quot;) %&gt;%
-  html_table(header = TRUE) %&gt;%
-  as.data.frame
-
-emojis_lexicon &lt;- data.frame(x=emojis$Char, y=emojis$Sentiment.score..1....1.)
-emojis_lexicon$x &lt;- iconv(emojis_lexicon$x, &quot;latin1&quot;, &quot;ASCII&quot;, &quot;byte&quot;)
-emojis_lexicon$y &lt;- ifelse(emojis_lexicon$y&gt;=0,&quot;pos_tag&quot;,&quot;neg_tag&quot;)
-emojis_lexicon &lt;- data.table(emojis_lexicon)
+<h2 id="creating-the-document-term-matrix-dtm-and-the-word2vec-w2v-model">Creating the Document Term Matrix (DTM) and the Word2Vec (W2V) model</h2>
+<p>First let us create a tf-idf DTM and later move on with the W2V model</p>
+<h3 id="tf-idf-dtm">tf-idf DTM</h3>
+<p>We will create a set of training DTM&rsquo;s and store them in train_dtm_kfold_freq and also a set of test DTM&rsquo;s storing them in test_dtm_kfold_freq.</p>
+<pre><code>train_dtm_kfold_freq &lt;- lapply(1:kf, function(x) DocumentTermMatrix(Corpus(VectorSource(raw_kfolds[[x]]$train$Text)), control = list(weighting = function(x) weightTfIdf(x, normalize = FALSE))))
+test_dtm_kfold_freq  &lt;- lapply(1:kf, function(x) DocumentTermMatrix(Corpus(VectorSource(raw_kfolds[[x]]$test$Text)), control = list(weighting =function(x)weightTfIdf(x, normalize = FALSE))))
 </code></pre>
-<p>Here we create a dictionary that we will later use in our preprocessing stage. We assign a positive score to emojis with a score greater or equal to 0 and a negative sentiment score to emojis with a negative score.</p>
-<h2 id="pre-processing-stage">Pre-processing stage</h2>
-<pre><code>sentiment_data &lt;- data.frame(gsub(&quot;http.+&quot;,&quot;linktag&quot;,sentiment_data[,1]),sentiment_data[,2])
-sentiment_data &lt;- data.frame(stri_replace_all_regex(sentiment_data[,1],
-                                                    pattern = str_c(&quot;\\b(&quot;, str_c(stocks, collapse=&quot;|&quot;), &quot;)\\b&quot;),
-                                                    replacement = &quot;cashtag&quot;,
-                                                    vectorize_all=FALSE),
-                             sentiment_data[,2])
-sentiment_data &lt;- data.frame(replace_emoji(sentiment_data[,1], emoji_dt = emojis_lexicon),sentiment_data[,2])
-sentiment_data &lt;- data.frame(removePunctuation(sentiment_data[,1]),sentiment_data[,2])
-sentiment_data &lt;- data.frame(removeNumbers(sentiment_data[,1]),sentiment_data[,2])
-sentiment_data &lt;- data.frame(tolower(sentiment_data[,1]),sentiment_data[,2])
-
-colnames(sentiment_data) &lt;- c(&quot;Text&quot;, &quot;Sentiment&quot;)
+<h3 id="w2v-model">W2V model</h3>
+<p>Let us train our continuous bag of words W2V model on our dataset containing 2.5 mil documents.</p>
+<pre><code>model &lt;- word2vec(sentiment_data$Text,type=&quot;cbow&quot;,min_count = 40,window =
 </code></pre>
-<p>Here we use a variety of different approaches to manipulate our data. In the first line we use base r functions to replace urls starting with http with the word linktag. In the second line we replace all ticker symbols with the word cashtag, here we use the dataset stocks containing all the ticker symbols. Next we use our emoji_lexicon that we created in the previous section. Next we remove punctuation, numbers, and convert text to lowercase.</p>
-<h2 id="final-steps-before-training-and-testing-our-algorithm">Final steps before training and testing our algorithm</h2>
-<p>First let us create a dataset of 800 documents with 400 bullish documents and 400 bearish documents we will use to train our algorithms and a test set of 200 remaining documents.</p>
-<pre><code>bull &lt;- sentiment_data[sentiment_data$Sentiment==&quot;Bullish&quot;,]
-bear &lt;- sentiment_data[sentiment_data$Sentiment==&quot;Bearish&quot;,]
+<p>Now that the model is trained we will create the datasets we need to make our predictions. First we create some datasets that include the sentiment and raw text data.</p>
+<pre><code>w2v_sentiment &lt;- list()
+for(i in 1:kf){
+  w2v_sentiment[[i]] &lt;- raw_kfolds[[i]]$training$Sentiment
+}
 
-sentiment_data_train &lt;- rbind(bull[1:400,],bear[1:400,])
+w2v_sentiment_test &lt;- list()
+for(i in 1:kf){
+  w2v_sentiment_test[[i]] &lt;- raw_kfolds[[i]]$test$Sentiment
+}
 
-sentiment_data_test &lt;- rbind(bull[401:500,],bear[401:500,])
+w2v_Text &lt;- list()
+for(i in 1:kf){
+  w2v_Text[[i]] &lt;- raw_kfolds[[i]]$training$Text
+}
+
+w2v_Text_test &lt;- list()
+for(i in 1:kf){
+  w2v_Text_test[[i]] &lt;- raw_kfolds[[i]]$test$Text
+}
 </code></pre>
-<p>Next let us create simple binary document term matrices.</p>
-<pre><code>train_dtm &lt;- DocumentTermMatrix(Corpus(VectorSource(sentiment_data_train$Text)))
-test_dtm &lt;- DocumentTermMatrix(Corpus(VectorSource(sentiment_data_test$Text)))
+<p>Next we tokenize our data and learn the vector representations of each paragraph in the training and the test set.</p>
+<pre><code>x &lt;- lapply(1:kf, function(x) tokenize_words(w2v_Text[[x]]))
+x_test &lt;- lapply(1:kf, function(x) tokenize_words(w2v_Text_test[[x]]))
 
-train_dtm$v[train_dtm$v &gt; 0] &lt;- 1
-test_dtm$v[test_dtm$v &gt; 0] &lt;- 1
+emb &lt;- lapply(1:kf, function(z) doc2vec(model, x[[z]]))
+emb_test &lt;- lapply(1:kf, function(z) doc2vec(model, x_test[[z]]))
+
 </code></pre>
-<p>Finaly let us train and test our algorithm.</p>
-<pre><code>NB_classifier &lt;- fnb.bernoulli(x=train_dtm, y=sentiment_data_train$Sentiment, sparse = TRUE)
+<p>Lastly we create data frames we can use in our model, and name the columns.</p>
+<pre><code>w2v_Sentiment_data &lt;- list()
+for(i in 1:kf){
+  w2v_Sentiment_data[[i]] &lt;- data.frame(emb[[i]],w2v_sentiment=w2v_sentiment[[i]])
+}
 
-NB_pred &lt;- predict(NB_classifier, test_dtm, type = &quot;class&quot;)
+for(i in 1:kf){
+  colnames(w2v_Sentiment_data[[i]]) &lt;- c('a_1', 'a_2', 'a_3', 'a_4', 'a_5', 'a_6', 'a_7', 'a_8', 'a_9', 'a_10', 'a_11', 'a_12', 'a_13', 'a_14', 'a_15', 'a_16', 'a_17', 'a_18', 'a_19', 'a_20', 'a_21', 'a_22', 'a_23', 'a_24', 'a_25', 'a_26', 'a_27', 'a_28', 'a_29', 'a_30', 'a_31', 'a_32', 'a_33', 'a_34', 'a_35', 'a_36', 'a_37', 'a_38', 'a_39', 'a_40', 'a_41', 'a_42', 'a_43', 'a_44', 'a_45', 'a_46', 'a_47', 'a_48', 'a_49', 'a_50', 'w2v_sentiment')
+}
 
-CT&lt;- CrossTable(NB_pred, sentiment_data$Sentiment,
-                  prop.chisq = FALSE,
-                  prop.t = FALSE,
-                  dnn = c('predicted', 'actual'))
+for(i in 1:kf){
+  colnames(emb_test[[i]]) &lt;-c('a_1', 'a_2', 'a_3', 'a_4', 'a_5', 'a_6', 'a_7', 'a_8', 'a_9', 'a_10', 'a_11', 'a_12', 'a_13', 'a_14', 'a_15', 'a_16', 'a_17', 'a_18', 'a_19', 'a_20', 'a_21', 'a_22', 'a_23', 'a_24', 'a_25', 'a_26', 'a_27', 'a_28', 'a_29', 'a_30', 'a_31', 'a_32', 'a_33', 'a_34', 'a_35', 'a_36', 'a_37', 'a_38', 'a_39', 'a_40', 'a_41', 'a_42', 'a_43', 'a_44', 'a_45', 'a_46', 'a_47', 'a_48', 'a_49', 'a_50')
+}
 </code></pre>
-<p>Let us have a look at our output.</p>
-<pre><code>             | actual
-   predicted |   Bearish |   Bullish | Row Total |
--------------|-----------|-----------|-----------|
-     Bearish |        78 |        48 |       126 |
-             |     0.619 |     0.381 |     0.630 |
-             |     0.780 |     0.480 |           |
--------------|-----------|-----------|-----------|
-     Bullish |        22 |        52 |        74 |
-             |     0.297 |     0.703 |     0.370 |
-             |     0.220 |     0.520 |           |
--------------|-----------|-----------|-----------|
-Column Total |       100 |       100 |       200 |
-             |     0.500 |     0.500 |           |
--------------|-----------|-----------|-----------|
+<h2 id="making-the-predictions-with-the-knn-algorithm">Making the predictions with the KNN algorithm</h2>
+<p>We will make predictions using the DTM and the W2V model.</p>
+<pre><code>KNN_pred &lt;- lapply(1:kf, function(x) FNN::knn(train=train_dtm_kfold_freq[[x]], test=test_dtm_kfold_freq[[x]], cl=raw_kfolds[[x]]$training$Sentiment))
+
+KNN_w2v_pred &lt;-lapply(1:kf, function(x) FNN::knn(train=w2v_Sentiment_data[[x]][,-51],test=emb_test[[x]], cl=w2v_Sentiment_data1[[x]][,51]))
+</code></pre>
+<p>The results show that using the W2V model, tremendously improves the performance of our algorithm in terms of accuracy.</p>
+<pre><code>        AC
+KNN_DTM 54.39
+KNN_W2V 85.33
 </code></pre>
 
     </div>
@@ -880,7 +907,7 @@ Column Total |       100 |       100 |       200 |
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=https://rokuc.github.io/post/text_analysis_r/&amp;text=Text%20Classification%20with%20R" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=https://rokuc.github.io/post/knn_w2v_dtm/&amp;text=Word2Vec%20vs%20Document%20Term%20Matrix" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -893,7 +920,7 @@ Column Total |       100 |       100 |       200 |
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=https://rokuc.github.io/post/text_analysis_r/&amp;t=Text%20Classification%20with%20R" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https://rokuc.github.io/post/knn_w2v_dtm/&amp;t=Word2Vec%20vs%20Document%20Term%20Matrix" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -906,7 +933,7 @@ Column Total |       100 |       100 |       200 |
       
       
       <li>
-        <a href="mailto:?subject=Text%20Classification%20with%20R&amp;body=https://rokuc.github.io/post/text_analysis_r/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Word2Vec%20vs%20Document%20Term%20Matrix&amp;body=https://rokuc.github.io/post/knn_w2v_dtm/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -919,7 +946,7 @@ Column Total |       100 |       100 |       200 |
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=https://rokuc.github.io/post/text_analysis_r/&amp;title=Text%20Classification%20with%20R" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=https://rokuc.github.io/post/knn_w2v_dtm/&amp;title=Word2Vec%20vs%20Document%20Term%20Matrix" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -932,7 +959,7 @@ Column Total |       100 |       100 |       200 |
       
       
       <li>
-        <a href="whatsapp://send?text=Text%20Classification%20with%20R%20https://rokuc.github.io/post/text_analysis_r/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="whatsapp://send?text=Word2Vec%20vs%20Document%20Term%20Matrix%20https://rokuc.github.io/post/knn_w2v_dtm/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -945,7 +972,7 @@ Column Total |       100 |       100 |       200 |
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=https://rokuc.github.io/post/text_analysis_r/&amp;title=Text%20Classification%20with%20R" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https://rokuc.github.io/post/knn_w2v_dtm/&amp;title=Word2Vec%20vs%20Document%20Term%20Matrix" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -1083,7 +1110,7 @@ Column Total |       100 |       100 |       200 |
     <h3>Related</h3>
     <ul>
       
-      <li><a href="/post/knn_w2v_dtm/">Word2Vec vs Document Term Matrix</a></li>
+      <li><a href="/post/text_analysis_r/">Text Classification with R</a></li>
       
     </ul>
   </div>

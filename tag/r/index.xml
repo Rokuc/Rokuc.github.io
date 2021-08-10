@@ -5,12 +5,161 @@
     <link>https://rokuc.github.io/tag/r/</link>
       <atom:link href="https://rokuc.github.io/tag/r/index.xml" rel="self" type="application/rss+xml" />
     <description>R</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 05 Aug 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 10 Aug 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://rokuc.github.io/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>R</title>
       <link>https://rokuc.github.io/tag/r/</link>
     </image>
+    
+    <item>
+      <title>Word2Vec vs Document Term Matrix</title>
+      <link>https://rokuc.github.io/post/knn_w2v_dtm/</link>
+      <pubDate>Tue, 10 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://rokuc.github.io/post/knn_w2v_dtm/</guid>
+      <description>&lt;h2 id=&#34;libraries-used-in-our-project&#34;&gt;Libraries Used in our project&lt;/h2&gt;
+&lt;p&gt;In this section we will import a few packages that will be used through our analysis.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# Importing ML packages
+library(FNN)
+
+# Text Analysis
+library(tokenizers)
+library(tm)
+library(word2vec)
+
+# Data Manipulation
+library(data.table)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The machine learning package FNN, is a package that implements the knn algorithm. Next we use some packages for Text analysis including a tokenization package, the text mining package to implement the document term matrices and the word2vec package. Finally the data.table package is useful to work with an alternative data structure.&lt;/p&gt;
+&lt;h2 id=&#34;our-data&#34;&gt;Our data&lt;/h2&gt;
+&lt;p&gt;In our project we will use data downloaded from the StockTwits platform. The dataset is pre-labeled as bullish/bearish and consists of about 2,500,000 preprocessed documents.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;setwd(&amp;quot;E:/Projects&amp;quot;)
+load(&amp;quot;sentiment_data_pp.RData&amp;quot;)
+head(sentiment_data,n=1)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;First let us have a look at the first document to get a general idea of how our data set looks.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;   Text
+1    cashtag earnings report two day bullish lead earnings growth linktag herb
+   Sentiment
+1    Bullish
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;experiment-setup&#34;&gt;Experiment setup&lt;/h2&gt;
+&lt;p&gt;First we will create an unbalanced dataset of 100,000 documents including 13% Bearish documents and 87% Bullish documents.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ind_Bullish &amp;lt;- which(sentiment_data$Sentiment==&amp;quot;Bullish&amp;quot;)
+ind_Bearish &amp;lt;- which(sentiment_data$Sentiment==&amp;quot;Bearish&amp;quot;)
+
+n &amp;lt;- 50000
+
+x &amp;lt;- rbind(sentiment_data[ind_Bearish[1:n*2*0.13],],sentiment_data[ind_Bullish[1:n*2*0.87],])
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we will set up a simple k-fold CV framework. First we create 10 folds and store it in the folds_data variable.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kf &amp;lt;- 10 #Set number of folds
+
+  bullish_sentiment &amp;lt;- data.table(x[x$Sentiment==&amp;quot;Bullish&amp;quot;,], rname = rownames(x[x$Sentiment==&amp;quot;Bullish&amp;quot;,])) #take only the bullish sentiment
+  bearish_sentiment &amp;lt;- data.table(x[x$Sentiment==&amp;quot;Bearish&amp;quot;,], rname = rownames(x[x$Sentiment==&amp;quot;Bearish&amp;quot;,]))
+
+  set.seed(2)
+  bull_index &amp;lt;- split(bullish_sentiment$rname, sample(1:kf, length(bullish_sentiment$rname), replace=T))
+  set.seed(2)
+  bear_index &amp;lt;- split(bearish_sentiment$rname, sample(1:kf, length(bearish_sentiment$rname), replace=T))
+
+  folds &amp;lt;- lapply(1:kf, function(y) c(bull_index[[y]],bear_index[[y]]))
+  folds_data &amp;lt;- lapply(folds, function(y) x[y,])
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Next we create 10 repetitions of the 10 folds, which will result in a list containing 10 elements each of which will be a list of two elements a training dataset and a testing dataset.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;data_prep_list&amp;lt;-function(data_set){
+  tests&amp;lt;-c(1:kf)
+  groups &amp;lt;- list()
+  #for each test set, construct a respective list with all combinations of train sets
+  for(i in seq_along(tests)){
+    #get train and validation sets for the given test set
+    train&amp;lt;-tests[!(tests %in% tests[i])]
+    #separate train and validation
+    tr&amp;lt;-combn(train,(kf-1))
+    #create list for train and validation sets
+    #first create a list of 8 for the train data
+    training &amp;lt;- list()
+    for(k in seq_len(ncol(tr))){
+      train &amp;lt;- data_set[tr[,k]]
+      train_table &amp;lt;- data.table()
+      for (b in 1:length(train)){
+        train_table &amp;lt;- rbind(train_table, train[[b]])
+      }
+    }
+    groups[[i]] &amp;lt;- list(training=train_table, test=data_set[[i]])  
+  }
+  groups  
+}
+
+raw_kfolds &amp;lt;- data_prep_list(folds_data)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;creating-the-document-term-matrix-dtm-and-the-word2vec-w2v-model&#34;&gt;Creating the Document Term Matrix (DTM) and the Word2Vec (W2V) model&lt;/h2&gt;
+&lt;p&gt;First let us create a tf-idf DTM and later move on with the W2V model&lt;/p&gt;
+&lt;h3 id=&#34;tf-idf-dtm&#34;&gt;tf-idf DTM&lt;/h3&gt;
+&lt;p&gt;We will create a set of training DTM&amp;rsquo;s and store them in train_dtm_kfold_freq and also a set of test DTM&amp;rsquo;s storing them in test_dtm_kfold_freq.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;train_dtm_kfold_freq &amp;lt;- lapply(1:kf, function(x) DocumentTermMatrix(Corpus(VectorSource(raw_kfolds[[x]]$train$Text)), control = list(weighting = function(x) weightTfIdf(x, normalize = FALSE))))
+test_dtm_kfold_freq  &amp;lt;- lapply(1:kf, function(x) DocumentTermMatrix(Corpus(VectorSource(raw_kfolds[[x]]$test$Text)), control = list(weighting =function(x)weightTfIdf(x, normalize = FALSE))))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;w2v-model&#34;&gt;W2V model&lt;/h3&gt;
+&lt;p&gt;Let us train our continuous bag of words W2V model on our dataset containing 2.5 mil documents.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;model &amp;lt;- word2vec(sentiment_data$Text,type=&amp;quot;cbow&amp;quot;,min_count = 40,window =
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now that the model is trained we will create the datasets we need to make our predictions. First we create some datasets that include the sentiment and raw text data.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;w2v_sentiment &amp;lt;- list()
+for(i in 1:kf){
+  w2v_sentiment[[i]] &amp;lt;- raw_kfolds[[i]]$training$Sentiment
+}
+
+w2v_sentiment_test &amp;lt;- list()
+for(i in 1:kf){
+  w2v_sentiment_test[[i]] &amp;lt;- raw_kfolds[[i]]$test$Sentiment
+}
+
+w2v_Text &amp;lt;- list()
+for(i in 1:kf){
+  w2v_Text[[i]] &amp;lt;- raw_kfolds[[i]]$training$Text
+}
+
+w2v_Text_test &amp;lt;- list()
+for(i in 1:kf){
+  w2v_Text_test[[i]] &amp;lt;- raw_kfolds[[i]]$test$Text
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Next we tokenize our data and learn the vector representations of each paragraph in the training and the test set.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;x &amp;lt;- lapply(1:kf, function(x) tokenize_words(w2v_Text[[x]]))
+x_test &amp;lt;- lapply(1:kf, function(x) tokenize_words(w2v_Text_test[[x]]))
+
+emb &amp;lt;- lapply(1:kf, function(z) doc2vec(model, x[[z]]))
+emb_test &amp;lt;- lapply(1:kf, function(z) doc2vec(model, x_test[[z]]))
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Lastly we create data frames we can use in our model, and name the columns.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;w2v_Sentiment_data &amp;lt;- list()
+for(i in 1:kf){
+  w2v_Sentiment_data[[i]] &amp;lt;- data.frame(emb[[i]],w2v_sentiment=w2v_sentiment[[i]])
+}
+
+for(i in 1:kf){
+  colnames(w2v_Sentiment_data[[i]]) &amp;lt;- c(&#39;a_1&#39;, &#39;a_2&#39;, &#39;a_3&#39;, &#39;a_4&#39;, &#39;a_5&#39;, &#39;a_6&#39;, &#39;a_7&#39;, &#39;a_8&#39;, &#39;a_9&#39;, &#39;a_10&#39;, &#39;a_11&#39;, &#39;a_12&#39;, &#39;a_13&#39;, &#39;a_14&#39;, &#39;a_15&#39;, &#39;a_16&#39;, &#39;a_17&#39;, &#39;a_18&#39;, &#39;a_19&#39;, &#39;a_20&#39;, &#39;a_21&#39;, &#39;a_22&#39;, &#39;a_23&#39;, &#39;a_24&#39;, &#39;a_25&#39;, &#39;a_26&#39;, &#39;a_27&#39;, &#39;a_28&#39;, &#39;a_29&#39;, &#39;a_30&#39;, &#39;a_31&#39;, &#39;a_32&#39;, &#39;a_33&#39;, &#39;a_34&#39;, &#39;a_35&#39;, &#39;a_36&#39;, &#39;a_37&#39;, &#39;a_38&#39;, &#39;a_39&#39;, &#39;a_40&#39;, &#39;a_41&#39;, &#39;a_42&#39;, &#39;a_43&#39;, &#39;a_44&#39;, &#39;a_45&#39;, &#39;a_46&#39;, &#39;a_47&#39;, &#39;a_48&#39;, &#39;a_49&#39;, &#39;a_50&#39;, &#39;w2v_sentiment&#39;)
+}
+
+for(i in 1:kf){
+  colnames(emb_test[[i]]) &amp;lt;-c(&#39;a_1&#39;, &#39;a_2&#39;, &#39;a_3&#39;, &#39;a_4&#39;, &#39;a_5&#39;, &#39;a_6&#39;, &#39;a_7&#39;, &#39;a_8&#39;, &#39;a_9&#39;, &#39;a_10&#39;, &#39;a_11&#39;, &#39;a_12&#39;, &#39;a_13&#39;, &#39;a_14&#39;, &#39;a_15&#39;, &#39;a_16&#39;, &#39;a_17&#39;, &#39;a_18&#39;, &#39;a_19&#39;, &#39;a_20&#39;, &#39;a_21&#39;, &#39;a_22&#39;, &#39;a_23&#39;, &#39;a_24&#39;, &#39;a_25&#39;, &#39;a_26&#39;, &#39;a_27&#39;, &#39;a_28&#39;, &#39;a_29&#39;, &#39;a_30&#39;, &#39;a_31&#39;, &#39;a_32&#39;, &#39;a_33&#39;, &#39;a_34&#39;, &#39;a_35&#39;, &#39;a_36&#39;, &#39;a_37&#39;, &#39;a_38&#39;, &#39;a_39&#39;, &#39;a_40&#39;, &#39;a_41&#39;, &#39;a_42&#39;, &#39;a_43&#39;, &#39;a_44&#39;, &#39;a_45&#39;, &#39;a_46&#39;, &#39;a_47&#39;, &#39;a_48&#39;, &#39;a_49&#39;, &#39;a_50&#39;)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;making-the-predictions-with-the-knn-algorithm&#34;&gt;Making the predictions with the KNN algorithm&lt;/h2&gt;
+&lt;p&gt;We will make predictions using the DTM and the W2V model.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;KNN_pred &amp;lt;- lapply(1:kf, function(x) FNN::knn(train=train_dtm_kfold_freq[[x]], test=test_dtm_kfold_freq[[x]], cl=raw_kfolds[[x]]$training$Sentiment))
+
+KNN_w2v_pred &amp;lt;-lapply(1:kf, function(x) FNN::knn(train=w2v_Sentiment_data[[x]][,-51],test=emb_test[[x]], cl=w2v_Sentiment_data1[[x]][,51]))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The results show that using the W2V model, tremendously improves the performance of our algorithm in terms of accuracy.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;        AC
+KNN_DTM 54.39
+KNN_W2V 85.33
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Text Classification with R</title>
