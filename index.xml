@@ -5,12 +5,25 @@
     <link>https://rokuc.github.io/</link>
       <atom:link href="https://rokuc.github.io/index.xml" rel="self" type="application/rss+xml" />
     <description>Rok Jankovic</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 10 Aug 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 28 Aug 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://rokuc.github.io/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>Rok Jankovic</title>
       <link>https://rokuc.github.io/</link>
     </image>
+    
+    <item>
+      <title>Project BERT</title>
+      <link>https://rokuc.github.io/post/bert/</link>
+      <pubDate>Sat, 28 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://rokuc.github.io/post/bert/</guid>
+      <description>&lt;h2 id=&#34;full-code-available-here&#34;&gt;Full code available here:&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;👉 &lt;a href=&#34;https://colab.research.google.com/drive/1AbhCHMgCqtQ_oGYLCSaVAo-lK2529IeR?usp=sharing&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Check out the &lt;strong&gt;full code&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;A post to follow.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Word2Vec vs Document Term Matrix</title>
